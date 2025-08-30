@@ -1,0 +1,99 @@
+<!--  -->
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NIyantri — Cart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: 'Inter', sans-serif;" class="font-sans bg-amber-50 text-stone-900 antialiased">
+  <header class="w-full bg-amber-100/80 sticky top-0 z-40">
+    <nav class="w-full flex items-center justify-between px-6 py-4">
+      <a href="./index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center text-amber-50 font-bold">N</div>
+        <div class="text-lg font-semibold">NIyantri</div>
+      </a>
+      <div class="flex items-center gap-6">
+        <a href="./index.html" class="text-stone-700 hover:text-stone-900 transition">Home</a>
+        <a href="./menu.html" class="text-stone-700 hover:text-stone-900 transition">Menu</a>
+        <a href="./cart.html" class="text-stone-900 font-semibold">Cart</a>
+        <a href="./contact.html" class="text-stone-700 hover:text-stone-900 transition">Contact</a>
+        <a href="./about.html" class="text-stone-700 hover:text-stone-900 transition">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="w-full px-6 py-10">
+    <h1 class="text-3xl font-bold mb-4">Your Cart</h1>
+    <div id="cartArea" class="w-full grid grid-cols-1 gap-4">
+      <!-- Cart items will be injected -->
+    </div>
+    <div class="w-full mt-6 bg-white p-4 rounded-lg shadow flex items-center justify-between">
+      <div class="text-lg font-medium">Total: <span id="cartTotal">$0.00</span></div>
+      <div class="flex items-center gap-3">
+        <button id="clearBtn" class="bg-stone-200 text-stone-800 px-4 py-2 rounded-md hover:bg-stone-300 transition">Clear</button>
+        <button id="checkoutBtn" class="bg-amber-700 text-amber-50 px-4 py-2 rounded-md hover:bg-amber-800 transition">Checkout (Mock)</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="w-full bg-stone-900 text-amber-50 px-6 py-6">
+    <div class="w-full flex items-center justify-between">
+      <div class="font-bold">NIyantri</div>
+      <div class="text-sm">Cart stored locally in your browser.</div>
+    </div>
+  </footer>
+
+  <script>
+    function getCart(){ try{return JSON.parse(localStorage.getItem('ny_cart')||'[]')}catch(e){return []} }
+    function saveCart(c){ localStorage.setItem('ny_cart', JSON.stringify(c)); renderCart(); }
+
+    function renderCart(){
+      const area = document.getElementById('cartArea'); area.innerHTML='';
+      const cart = getCart();
+      if(cart.length===0){ area.innerHTML = '<div class="w-full bg-white p-6 rounded-lg text-center text-stone-600">Your cart is empty. Browse the <a href="./menu.html" class="text-amber-700 underline">menu</a>.</div>'; document.getElementById('cartTotal').textContent='$0.00'; return; }
+
+      let total = 0;
+      cart.forEach(item=>{
+        const row = document.createElement('div');
+        row.className = 'w-full bg-white p-4 rounded-lg shadow flex items-center gap-4';
+        row.innerHTML = `
+          <div class="w-24 h-24 bg-stone-100 rounded-md flex items-center justify-center text-stone-500">${item.name}</div>
+          <div class="flex-1">
+            <div class="font-semibold">${item.name}</div>
+            <div class="text-sm text-stone-600">$${item.price.toFixed(2)}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="decBtn bg-stone-200 px-3 py-1 rounded-md">-</button>
+            <div class="px-3">${item.qty}</div>
+            <button class="incBtn bg-stone-200 px-3 py-1 rounded-md">+</button>
+          </div>
+          <div class="w-24 text-right font-semibold">$${(item.price*item.qty).toFixed(2)}</div>
+          <div><button class="rmvBtn text-sm text-red-600">Remove</button></div>
+        `;
+        area.appendChild(row);
+
+        total += item.price * item.qty;
+
+        // attach handlers
+        row.querySelector('.incBtn').addEventListener('click', ()=>{ updateQty(item.id, item.qty+1); });
+        row.querySelector('.decBtn').addEventListener('click', ()=>{ updateQty(item.id, Math.max(1, item.qty-1)); });
+        row.querySelector('.rmvBtn').addEventListener('click', ()=>{ removeItem(item.id); });
+      });
+      document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+    }
+
+    function updateQty(id, qty){ const cart=getCart(); const it=cart.find(i=>i.id===id); if(it){ it.qty = qty; saveCart(cart); } }
+    function removeItem(id){ let cart=getCart(); cart = cart.filter(i=>i.id!==id); saveCart(cart); }
+
+    document.getElementById('clearBtn').addEventListener('click', ()=>{ localStorage.removeItem('ny_cart'); renderCart(); });
+    document.getElementById('checkoutBtn').addEventListener('click', ()=>{ alert('Checkout is a mock — implement your payment flow here.'); });
+
+    window.addEventListener('DOMContentLoaded', ()=>{ renderCart(); });
+  </script>
+</body>
+</html>
