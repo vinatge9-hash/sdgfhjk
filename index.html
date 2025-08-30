@@ -1,0 +1,182 @@
+<!--  -->
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NIyantri — Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: 'Inter', sans-serif;" class="font-sans bg-amber-50 text-stone-900 antialiased leading-normal">
+  <!-- Navigation -->
+  <header class="w-full bg-amber-100/80 backdrop-blur sticky top-0 z-40">
+    <nav class="w-full flex items-center justify-between px-6 py-4">
+      <a href="./index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center text-amber-50 font-bold">N</div>
+        <div class="text-lg font-semibold">NIyantri</div>
+      </a>
+      <div class="flex items-center gap-6">
+        <a href="./index.html" class="text-stone-700 hover:text-stone-900 transition">Home</a>
+        <a href="./menu.html" class="text-stone-700 hover:text-stone-900 transition">Menu</a>
+        <a href="./cart.html" class="text-stone-700 hover:text-stone-900 transition">Cart <span id="cartCountHeader" class="ml-1 inline-block bg-amber-700 text-amber-50 rounded-full px-2 text-sm">0</span></a>
+        <a href="./contact.html" class="text-stone-700 hover:text-stone-900 transition">Contact</a>
+        <a href="./about.html" class="text-stone-700 hover:text-stone-900 transition">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main class="w-full">
+    <section class="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-6 px-6 py-12">
+      <div class="w-full animate-hero opacity-0 translate-y-6" id="heroText">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">NIyantri — Coffee crafted for your moments</h1>
+        <p class="text-stone-700 mb-6 max-w-xl">Warm, modern, and thoughtfully roasted. Browse our menu, add to cart, and enjoy easy, delightful coffee at home or on the go.</p>
+        <div class="flex items-center gap-4">
+          <a href="./menu.html" class="inline-block bg-stone-900 text-amber-50 px-5 py-3 rounded-md shadow hover:shadow-md transform hover:-translate-y-1 transition">See Menu</a>
+          <a href="./contact.html" class="inline-block text-stone-700 px-4 py-3 rounded-md hover:bg-amber-100 transition">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="w-full flex items-center justify-center animate-hero opacity-0 translate-y-6" id="heroImage">
+        <img src="https://pixabay.com/get/gd6421ebd034149883c32cfd7a295195a57b04914ef2957f503d8e4503847c78ee5bbb4312f4ad06fd5f05c0a6cdcabb0a33c5de1097a8c48ec8eedb00fd360f0_640.jpg" alt="Latte art" class="w-full max-w-xl rounded-lg shadow-lg object-cover" />
+      </div>
+    </section>
+
+    <!-- Menu Preview -->
+    <section class="w-full px-6 py-8 bg-amber-50">
+      <div class="w-full flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold">Featured Menu</h2>
+        <a href="./menu.html" class="text-stone-700 hover:text-stone-900 transition">View Full Menu →</a>
+      </div>
+
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Item Card (repeat) -->
+        <div class="w-full bg-white rounded-lg shadow p-4 flex flex-col gap-3 transform hover:-translate-y-1 transition">
+          <img src="https://pixabay.com/get/g03f3f12b5dacb21f47a3fe7ee319e401e8c1b644b21e6b1473ed1642aded090d71049c2d889672fc80634ddbe3e81c0072ec362b9180da754b9452a0df647de0_640.jpg" alt="Cappuccino" class="w-full h-40 object-cover rounded" />
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="font-semibold">Cappuccino</h3>
+              <p class="text-sm text-stone-600">Espresso with steamed milk and a milk foam crown.</p>
+            </div>
+            <div class="text-amber-700 font-semibold">$3.50</div>
+          </div>
+          <div class="mt-auto flex items-center gap-3">
+            <button class="addBtn inline-block bg-amber-700 text-amber-50 px-3 py-2 rounded-md hover:bg-amber-800 transition" data-id="cappuccino" data-name="Cappuccino" data-price="3.5">Add to Cart</button>
+            <a href="./menu.html" class="text-stone-600 text-sm">More</a>
+          </div>
+        </div>
+
+        <div class="w-full bg-white rounded-lg shadow p-4 flex flex-col gap-3 transform hover:-translate-y-1 transition">
+          <img src="https://pixabay.com/get/gac2f0ce122645e73f68c418e8ea14ff159976e76b5b16996f60861c04a5a51a1bfbeec187c73bd9d6f82058563feed8fd3c7cd188a97895fa35e1f1cabc28de7_640.jpg" alt="Espresso" class="w-full h-40 object-cover rounded" />
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="font-semibold">Espresso</h3>
+              <p class="text-sm text-stone-600">Rich single-or-double shot for pure coffee lovers.</p>
+            </div>
+            <div class="text-amber-700 font-semibold">$2.00</div>
+          </div>
+          <div class="mt-auto flex items-center gap-3">
+            <button class="addBtn inline-block bg-amber-700 text-amber-50 px-3 py-2 rounded-md hover:bg-amber-800 transition" data-id="espresso" data-name="Espresso" data-price="2">Add to Cart</button>
+            <a href="./menu.html" class="text-stone-600 text-sm">More</a>
+          </div>
+        </div>
+
+        <div class="w-full bg-white rounded-lg shadow p-4 flex flex-col gap-3 transform hover:-translate-y-1 transition">
+          <img src="https://images.unsplash.com/photo-1610286989406-b0cb26fe9967?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw3fHx0YWxsJTIwZ2xhc3MlMjBvZiUyMGljZWQlMjBjb2ZmZWUlMjB3aXRoJTIwY29uZGVuc2F0aW9ufGVufDB8MHx8fDE3NTY1MzgwODd8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Iced Coffee" class="w-full h-40 object-cover rounded" />
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="font-semibold">Iced Coffee</h3>
+              <p class="text-sm text-stone-600">Chilled, crisp, and refreshing — great for warm days.</p>
+            </div>
+            <div class="text-amber-700 font-semibold">$3.00</div>
+          </div>
+          <div class="mt-auto flex items-center gap-3">
+            <button class="addBtn inline-block bg-amber-700 text-amber-50 px-3 py-2 rounded-md hover:bg-amber-800 transition" data-id="iced_coffee" data-name="Iced Coffee" data-price="3">Add to Cart</button>
+            <a href="./menu.html" class="text-stone-600 text-sm">More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About strip -->
+    <section class="w-full px-6 py-10 bg-white">
+      <div class="w-full flex flex-col md:flex-row items-center gap-6">
+        <div class="flex-1">
+          <h3 class="text-xl font-bold">Our Story</h3>
+          <p class="text-stone-700 mt-2">NIyantri blends modern coffee craft with warm, approachable flavors. We focus on quality beans and careful preparation so you can enjoy a consistent cup every time.</p>
+        </div>
+        <div class="flex-1 flex justify-center">
+          <img src="https://images.pexels.com/photos/2074110/pexels-photo-2074110.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Barista" class="rounded-lg shadow w-full max-w-sm object-cover" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="w-full bg-stone-900 text-amber-50 px-6 py-8">
+    <div class="w-full flex flex-col md:flex-row items-start md:items-center justify-between">
+      <div>
+        <div class="font-bold">NIyantri</div>
+        <div class="text-sm text-amber-200/80">Made with care • Modern coffee tones</div>
+      </div>
+      <div class="mt-4 md:mt-0 text-sm">© <span id="year"></span> NIyantri</div>
+    </div>
+  </footer>
+
+  <script>
+    // Small entrance animations
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('heroText').classList.remove('opacity-0','translate-y-6');
+        document.getElementById('heroText').classList.add('opacity-100','translate-y-0','transition','duration-700');
+        document.getElementById('heroImage').classList.remove('opacity-0','translate-y-6');
+        document.getElementById('heroImage').classList.add('opacity-100','translate-y-0','transition','duration-700','delay-150');
+      }, 80);
+
+      // set year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // initialize cart count
+      updateCartCount();
+
+      // attach add buttons
+      document.querySelectorAll('.addBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          const name = btn.dataset.name;
+          const price = parseFloat(btn.dataset.price);
+          addToCart({id, name, price, qty:1});
+          btn.textContent = 'Added';
+          setTimeout(()=> btn.textContent = 'Add to Cart', 800);
+        });
+      });
+    });
+
+    function getCart(){
+      try{
+        return JSON.parse(localStorage.getItem('ny_cart') || '[]');
+      }catch(e){return []}
+    }
+    function saveCart(cart){
+      localStorage.setItem('ny_cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+    function addToCart(item){
+      const cart = getCart();
+      const existing = cart.find(i => i.id === item.id);
+      if(existing){ existing.qty += item.qty; }
+      else{ cart.push(item); }
+      saveCart(cart);
+    }
+    function updateCartCount(){
+      const cart = getCart();
+      const count = cart.reduce((s,i)=> s + (i.qty||0),0);
+      const el = document.getElementById('cartCountHeader');
+      if(el) el.textContent = count;
+    }
+  </script>
+</body>
+</html>
