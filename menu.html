@@ -1,0 +1,98 @@
+<!--  -->
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NIyantri — Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: 'Inter', sans-serif;" class="font-sans bg-amber-50 text-stone-900 antialiased">
+  <header class="w-full bg-amber-100/80 sticky top-0 z-40">
+    <nav class="w-full flex items-center justify-between px-6 py-4">
+      <a href="./index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center text-amber-50 font-bold">N</div>
+        <div class="text-lg font-semibold">NIyantri</div>
+      </a>
+      <div class="flex items-center gap-6">
+        <a href="./index.html" class="text-stone-700 hover:text-stone-900 transition">Home</a>
+        <a href="./menu.html" class="text-stone-900 font-semibold">Menu</a>
+        <a href="./cart.html" class="text-stone-700 hover:text-stone-900 transition">Cart <span id="cartCountMenu" class="ml-1 inline-block bg-amber-700 text-amber-50 rounded-full px-2 text-sm">0</span></a>
+        <a href="./contact.html" class="text-stone-700 hover:text-stone-900 transition">Contact</a>
+        <a href="./about.html" class="text-stone-700 hover:text-stone-900 transition">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="w-full px-6 py-10">
+    <h1 class="text-3xl font-bold mb-4">Menu</h1>
+    <p class="text-stone-700 mb-8">A modern selection of classic coffee drinks. Click "Add to Cart" to build your order.</p>
+
+    <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Dynamic list of common coffees -->
+      <template id="itemTpl">
+        <div class="w-full bg-white rounded-lg shadow p-4 flex flex-col gap-3 transform hover:-translate-y-1 transition">
+          <img class="w-full h-40 object-cover rounded" />
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="font-semibold item-name"></h3>
+              <p class="text-sm text-stone-600 item-desc"></p>
+            </div>
+            <div class="text-amber-700 font-semibold item-price"></div>
+          </div>
+          <div class="mt-auto flex items-center gap-3">
+            <button class="addBtn inline-block bg-amber-700 text-amber-50 px-3 py-2 rounded-md hover:bg-amber-800 transition">Add to Cart</button>
+            <div class="text-sm text-stone-500 ml-auto">Popular</div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </main>
+
+  <footer class="w-full bg-stone-900 text-amber-50 px-6 py-6">
+    <div class="w-full flex items-center justify-between">
+      <div class="font-bold">NIyantri</div>
+      <div class="text-sm">Browse and add items to your cart.</div>
+    </div>
+  </footer>
+
+  <script>
+    const MENU_ITEMS = [
+      {id:'cappuccino', name:'Cappuccino', price:3.5, desc:'Espresso, steamed milk, and foam.', img:'https://images.pexels.com/photos/433143/pexels-photo-433143.jpeg?auto=compress&cs=tinysrgb&h=650&w=940'},
+      {id:'espresso', name:'Espresso', price:2.0, desc:'Rich and concentrated shot.', img:'https://images.pexels.com/photos/7282737/pexels-photo-7282737.jpeg?auto=compress&cs=tinysrgb&h=650&w=940'},
+      {id:'latte', name:'Latte', price:3.8, desc:'Smooth espresso with steamed milk.', img:'https://images.unsplash.com/photo-1563311977-d285756282dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHwzfHxsYXR0ZSUyMHdpdGglMjBhcnQlMjBpbiUyMGNlcmFtaWMlMjBjdXB8ZW58MHwwfHx8MTc1NjUzODA5MXww&ixlib=rb-4.1.0&q=80&w=1080'},
+      {id:'iced_coffee', name:'Iced Coffee', price:3.0, desc:'Cold brew style iced coffee.', img:'https://pixabay.com/get/g805a16a5c25650af94a759e5c0929fc858756f0351fba655f6a032cee4ba0d2562b6321761191f2b57c53d20a8a125dd4a39e13645d8fda669aaa22004dadf2d_640.jpg'},
+      {id:'americano', name:'Americano', price:2.5, desc:'Espresso diluted with hot water.', img:'https://images.unsplash.com/photo-1587985782608-20062892559d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw3fHxhbWVyaWNhbm8lMjBpbiUyMGElMjBjZXJhbWljJTIwbXVnfGVufDB8MHx8fDE3NTY1MzgwOTJ8MA&ixlib=rb-4.1.0&q=80&w=1080'},
+      {id:'mocha', name:'Mocha', price:4.0, desc:'Chocolatey espresso drink with steamed milk.', img:'https://images.pexels.com/photos/17506136/pexels-photo-17506136.jpeg?auto=compress&cs=tinysrgb&h=650&w=940'}
+    ];
+
+    function getCart(){
+      try{return JSON.parse(localStorage.getItem('ny_cart')||'[]')}catch(e){return []}
+    }
+    function saveCart(c){ localStorage.setItem('ny_cart', JSON.stringify(c)); updateCartCount(); }
+    function addToCart(item){ const cart=getCart(); const ex=cart.find(i=>i.id===item.id); if(ex) ex.qty+=1; else cart.push({...item, qty:1}); saveCart(cart); }
+    function updateCartCount(){ const cart=getCart(); const count=cart.reduce((s,i)=>s+(i.qty||0),0); const el=document.getElementById('cartCountMenu'); if(el) el.textContent=count; }
+
+    // Render menu
+    const container = document.querySelector('main div.grid');
+    const tpl = document.getElementById('itemTpl');
+    MENU_ITEMS.forEach(item=>{
+      const node = tpl.content.cloneNode(true);
+      const img = node.querySelector('img'); img.src = item.img; img.alt = item.name;
+      node.querySelector('.item-name').textContent = item.name;
+      node.querySelector('.item-desc').textContent = item.desc;
+      node.querySelector('.item-price').textContent = `$${item.price.toFixed(2)}`;
+      const btn = node.querySelector('.addBtn');
+      btn.addEventListener('click', ()=>{ addToCart(item); btn.textContent='Added'; setTimeout(()=>btn.textContent='Add to Cart',700); });
+      container.appendChild(node);
+    });
+
+    window.addEventListener('DOMContentLoaded', ()=>{
+      updateCartCount();
+    });
+  </script>
+</body>
+</html>
